@@ -92,8 +92,6 @@ namespace EmplyeeDetails.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
         public List<SelectListItem> GetCountries()
         {
             var lstCountries = new List<SelectListItem>(); 

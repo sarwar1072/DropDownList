@@ -3,14 +3,16 @@ using EmplyeeDetails.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EmplyeeDetails.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230411200542_removecascade")]
+    partial class removecascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,57 +64,11 @@ namespace EmplyeeDetails.Web.Migrations
                     b.ToTable("country");
                 });
 
-            modelBuilder.Entity("EmplyeeDetails.Web.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmailId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(75)")
-                        .HasMaxLength(75);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(75)")
-                        .HasMaxLength(75);
-
-                    b.Property<string>("PhotoUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("customer");
-                });
-
             modelBuilder.Entity("EmplyeeDetails.Web.Models.City", b =>
                 {
                     b.HasOne("EmplyeeDetails.Web.Models.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EmplyeeDetails.Web.Models.Customer", b =>
-                {
-                    b.HasOne("EmplyeeDetails.Web.Models.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

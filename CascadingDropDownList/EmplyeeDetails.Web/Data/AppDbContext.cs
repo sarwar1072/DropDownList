@@ -11,5 +11,7 @@ namespace EmplyeeDetails.Web.Data
         }
         public DbSet<Country> country { get; set; }
         public DbSet<City> city { get; set; }
+        public DbSet<Customer> customer { get; set; }
+
     }
 }
